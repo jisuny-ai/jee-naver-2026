@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>양지선 포트폴리오</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="description" content="양지선 포트폴리오: 의료 AI 에이전트 프로덕트 기획 및 전략">
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+<style>
+@font-face{font-family:"Pretendard";src:url("fonts/PretendardVariable.woff2") format("woff2");font-weight:45 920;font-display:swap}
+/* Layout: dark hero with one handoff diagram; 5 stories share one slot order; evidence sheet with expandable rows. Navy ink, one orange accent. */
+:root{
+  --bg:#F5F7FA; --surface:#FFFFFF; --surface-2:#EDF1F6; --ink:#13263A; --ink-2:#3C4F63; --ink-3:#6A7B8D;
+  --line:#D9E0E8; --accent:#D9540F; --accent-soft:#FDEBDD; --blue:#1F5F9E; --blue-soft:#DDEFF8;
+  --hero-bg:#13263A; --hero-ink:#F4F7FB; --hero-ink-2:#B8C6D6; --hero-line:#2C4460; --hero-accent:#FF8A4C;
+  --ok:#1E7B5A; --ok-soft:#DFF3EA; --hold:#9A5B00; --hold-soft:#FFF0D2;
+  --font:"Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1A27; --surface:#15283A; --surface-2:#1B3147; --ink:#EAF0F7; --ink-2:#BCCADA; --ink-3:#8DA0B5; --line:#2B4259;
+  --accent:#FF8A4C; --accent-soft:#3A2A1F; --blue:#7FB6E8; --blue-soft:#183A55;
+  --hero-bg:#0A131D; --ok:#62D2A5; --ok-soft:#14372B; --hold:#F2C063; --hold-soft:#3A2F14; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1A27; --surface:#15283A; --surface-2:#1B3147; --ink:#EAF0F7; --ink-2:#BCCADA; --ink-3:#8DA0B5; --line:#2B4259;
+  --accent:#FF8A4C; --accent-soft:#3A2A1F; --blue:#7FB6E8; --blue-soft:#183A55;
+  --hero-bg:#0A131D; --ok:#62D2A5; --ok-soft:#14372B; --hold:#F2C063; --hold-soft:#3A2F14; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.7;margin:0;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3,p{margin:0;text-wrap:balance}
+p{text-wrap:pretty}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);color:var(--ink);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:20px;height:52px}
+.top .who{font-weight:800;font-size:15px;white-space:nowrap}
+.top nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.top nav::-webkit-scrollbar{display:none}
+.top nav a{font-size:13px;font-weight:600;text-decoration:none;color:var(--ink-2);padding:6px 10px;border-radius:999px;white-space:nowrap}
+.top nav a:hover{color:var(--ink);background:var(--surface-2)}
+
+/* layer 1: first screen (option B: text left, prototype screen right) */
+.hero{background:var(--surface);border-bottom:1px solid var(--line)}
+.hero .split{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+.hero .l{padding:56px 40px 56px 0}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--accent);margin-bottom:14px}
+.hero h1{font-size:clamp(28px,3.8vw,42px);line-height:1.3;font-weight:800;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .sub{margin-top:18px;font-size:18px;color:var(--ink-2);max-width:none;text-wrap:wrap}
+.rows{margin-top:30px;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.row b{font-size:14.5px}
+.row p{font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.go{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+.go a{font-size:12px;font-weight:700;text-decoration:none;padding:2px 9px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--ink-2)}
+.go a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.read{margin-top:14px;font-size:13px;color:var(--ink-3)}
+.hero .r{background:var(--blue-soft);padding:36px;display:grid;place-items:center;align-content:center;gap:20px}
+.phone{width:min(270px,100%);border-radius:26px;overflow:hidden;border:8px solid var(--ink);background:var(--surface);box-shadow:0 18px 40px rgba(19,38,58,.18)}
+.phone img{display:block;width:100%;height:auto}
+.hero .tag{background:var(--surface);border-radius:10px;padding:12px 16px;font-size:13.5px;color:var(--ink-2);width:100%;max-width:340px}
+.hero .tag b{color:var(--ink)}
+.cta{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;font-weight:800;text-decoration:none;padding:12px 18px;border-radius:10px;font-size:15px;margin-top:10px}
+.cta:hover{filter:brightness(1.06)}
+
+
+/* reading modes */
+.modes{display:inline-flex;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
+.modes button{font:inherit;font-size:13.5px;font-weight:700;color:var(--ink-2);background:transparent;border:0;border-radius:999px;padding:6px 14px;cursor:pointer;white-space:nowrap}
+.modes button:hover{color:var(--ink)}
+.modes button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.modebar{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
+.modebar .hint{font-size:13.5px;color:var(--ink-3)}
+.top .modes{margin-left:auto}
+.top .modes+nav{margin-left:8px}
+html[data-mode="3"] [data-t="10"]{display:none!important}
+html[data-mode="30"] section.story,html[data-mode="30"] .evidence{display:none}
+html[data-mode="30"] .hero{border-bottom:0}
+html[data-mode="3"] .evi{grid-template-columns:minmax(0,1fr);padding-block:28px}
+@media (max-width:860px){.top .modes{margin-left:0}.top .modes button{padding:6px 10px}}
+
+
+/* inline text editing (editors only) */
+.editfab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:40;font:inherit;font-weight:800;font-size:14px;background:var(--ink);color:var(--surface);border:0;border-radius:999px;padding:12px 18px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.editbar{position:fixed;left:50%;transform:translateX(-50%);bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:40;background:var(--ink);color:var(--surface);border-radius:14px;padding:10px 12px;display:flex;gap:8px;align-items:center;box-shadow:0 8px 24px rgba(0,0,0,.3);max-width:calc(100vw - 32px);flex-wrap:wrap;justify-content:center}
+.editbar span{font-size:13px;padding:0 6px}
+.editbar button{font:inherit;font-size:13.5px;font-weight:800;border:0;border-radius:9px;padding:8px 14px;cursor:pointer}
+.editbar .save{background:var(--accent);color:#fff}
+.editbar .cancel{background:transparent;color:var(--surface);border:1px solid currentColor}
+.editbar[hidden],.editfab[hidden]{display:none!important}
+html.editing [contenteditable="true"]{outline:1px dashed var(--ink-3);outline-offset:3px;cursor:text;border-radius:3px}
+html.editing [contenteditable="true"]:focus{outline:2px solid var(--accent)}
+
+/* layer 2: stories */
+section.story{padding-block:64px;border-bottom:1px solid var(--line)}
+.sh{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:start;margin-bottom:28px}
+.no{grid-row:span 3;font-size:44px;font-weight:800;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums;min-width:1.1em}
+.sh .tag{font-size:12.5px;font-weight:700;color:var(--ink-3);letter-spacing:.04em}
+.sh h2{font-size:clamp(22px,3vw,30px);line-height:1.32;font-weight:800;letter-spacing:-.01em}
+.sh .proof{font-size:16.5px;color:var(--ink-2);margin-top:4px;text-wrap:wrap}
+.body{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:start}
+.body.flip{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+.body.flip .fig{order:-1}
+.slots{display:grid;gap:18px}
+.slot .l{font-size:12.5px;font-weight:800;letter-spacing:.05em;color:var(--blue);margin-bottom:4px}
+.slot p{color:var(--ink-2)}
+.slot p b{color:var(--ink);font-weight:700}
+.team{background:var(--blue-soft);border-radius:12px;padding:16px 18px}
+.team .l{color:var(--blue)}
+.team p{color:var(--ink)}
+.team.none{background:var(--surface-2)}
+.take{border-left:4px solid var(--accent);padding:4px 0 4px 16px}
+.take .l{color:var(--accent)}
+.take p{color:var(--ink);font-weight:500}
+.fig{display:grid;gap:16px;min-width:0}
+figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+figure img{display:block;width:100%;height:auto}
+figcaption{font-size:13px;color:var(--ink-3);padding:10px 14px;border-top:1px solid var(--line);line-height:1.5}
+.pad{padding:20px}
+.chip{display:inline-block;font-size:12px;font-weight:800;padding:3px 10px;border-radius:999px;background:var(--hold-soft);color:var(--hold);vertical-align:middle;margin-left:6px}
+.chip.ok{background:var(--ok-soft);color:var(--ok)}
+details{border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+details+details{margin-top:10px}
+summary{cursor:pointer;list-style:none;padding:12px 16px;font-weight:700;font-size:14.5px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:20px;font-weight:500;color:var(--accent);line-height:1}
+details[open] summary::after{content:"\2212"}
+details .in{padding:0 16px 16px;color:var(--ink-2);font-size:15px}
+details .in p+p{margin-top:8px}
+.steps{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13.5px;font-weight:700}
+.steps span{background:var(--surface-2);border-radius:8px;padding:6px 10px}
+.steps i{font-style:normal;color:var(--ink-3)}
+.rules{display:grid;gap:8px;font-size:14px;color:var(--ink-2)}
+.rules div{display:flex;gap:10px}
+.rules b{color:var(--accent);flex:none}
+
+/* flows */
+.flow{display:grid;gap:10px}
+.node{background:var(--surface-2);border-radius:10px;padding:10px 14px;font-size:14.5px}
+.node.hl{background:var(--blue-soft);color:var(--ink)}
+.node.warn{background:var(--hold-soft);color:var(--ink)}
+.down{text-align:center;color:var(--ink-3);font-size:13px;line-height:1}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.method{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.method div{background:var(--surface-2);border-radius:10px;padding:10px 12px;font-size:13.5px;line-height:1.5}
+.shift{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
+.shift div{border-radius:10px;padding:12px 14px;font-size:14.5px;font-weight:700;text-align:center}
+.shift .from{background:var(--surface-2);color:var(--ink-3)}
+.shift .to{background:var(--accent-soft);color:var(--accent)}
+.shift span{color:var(--ink-3)}
+.dots{display:flex;gap:6px;margin:6px 0 8px}
+.dots i{width:22px;height:22px;border-radius:50%;background:var(--accent)}
+.big{font-size:44px;font-weight:800;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.big small{font-size:18px;color:var(--ink-2);font-weight:700}
+.metrics{display:grid;gap:8px;font-size:14px;color:var(--ink-2);counter-reset:m}
+.metrics div{display:flex;gap:10px}
+.metrics div::before{counter-increment:m;content:counter(m);flex:none;width:22px;height:22px;border-radius:50%;background:var(--hold-soft);color:var(--hold);font-weight:800;font-size:12px;display:grid;place-items:center;margin-top:2px}
+
+/* layer 3: evidence sheet */
+.evidence{padding-block:64px}
+.evidence h2{font-size:clamp(22px,3vw,30px);font-weight:800;margin-bottom:6px}
+.evidence .lead{color:var(--ink-2);margin-bottom:28px}
+.evi{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:36px;padding-block:36px;border-top:1px solid var(--line);align-items:start}
+.evi:first-of-type{border-top:0;padding-top:0}
+.evi.solo{grid-template-columns:minmax(0,1fr)}
+.evi .kick{font-size:13px;color:var(--ink-3);font-weight:600;margin-bottom:6px}
+.evi h3{font-size:clamp(20px,2.4vw,26px);line-height:1.35;font-weight:800;letter-spacing:-.01em;margin-bottom:12px}
+.evi p.t{color:var(--ink-2);max-width:40em}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:22px}
+.stat b{display:block;font-size:clamp(20px,2.6vw,28px);font-weight:800;line-height:1.2;font-variant-numeric:tabular-nums}
+.stat span{display:block;font-size:13px;color:var(--ink-2);line-height:1.5;margin-top:4px}
+.evi details{margin-top:18px}
+.mini{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+.mini th,.mini td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.mini th{font-size:12.5px;color:var(--ink-3);font-weight:700}
+.kv{display:grid;gap:8px}
+.kv div b{color:var(--ink)}
+.kv div{color:var(--ink-2);font-size:15px}
+.sumwrap{overflow-x:auto;margin-bottom:36px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:6px 14px 10px}
+.sum{min-width:560px;margin-top:0}
+.sum td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+.sum td{color:var(--ink-2)}
+.infig{margin-top:14px}
+.tbs{display:grid;gap:7px;margin-top:14px}
+.figcol{display:grid;gap:16px;min-width:0}
+.ipw{display:grid;grid-template-columns:1fr;gap:6px}
+.ipy{font-size:12px;font-weight:700;color:var(--ink-3)}
+.ipx{text-align:right;font-size:12px;font-weight:700;color:var(--ink-3)}
+.ipa{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:4px;aspect-ratio:3/2}
+.ipa>i{background:var(--surface-2);border-radius:6px}
+.ipd{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%}
+.ipd b{position:absolute;top:50%;transform:translateY(-50%);font-size:11.5px;font-weight:700;color:var(--ink);white-space:nowrap}
+.ipd.r b{left:18px}.ipd.l b{right:18px}
+.ipd.n{background:#D13B3B}.ipd.k{background:#1E9E5A}.ipd.o{background:#2B7BC4}
+.ipz{display:grid;gap:6px;margin-top:12px;font-size:12.5px;color:var(--ink-2)}
+.ipz div{border-left:4px solid;padding-left:10px}.ipz b{color:var(--ink);margin-right:8px}
+.ipz .n{border-color:#D13B3B}.ipz .k{border-color:#1E9E5A}.ipz .o{border-color:#2B7BC4}
+.tb{display:grid;grid-template-columns:minmax(0,1fr) 90px 46px;gap:8px;align-items:center;font-size:12.5px;color:var(--ink-2);line-height:1.35}
+.tb .tr{height:12px;border-radius:6px;background:var(--surface-2);overflow:hidden;display:block}
+.tb .tr i{display:block;height:100%;background:var(--ink-3);border-radius:6px}
+.tb .tv{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+.tb.g .tr i{background:var(--blue)}
+.tb.b .tr i{background:#D13B3B}.tb.b .tn,.tb.b .tv{color:#D13B3B;font-weight:800}
+.tb.w .tn{color:var(--accent);font-weight:700}
+@media (min-width:561px){.tb{grid-template-columns:minmax(0,1fr) 150px 46px}}
+.evi p.pull{margin-top:12px;border-left:4px solid var(--accent);padding-left:14px;color:var(--ink)}
+footer{padding-block:36px 56px;color:var(--ink-3);font-size:13.5px;border-top:1px solid var(--line)}
+
+@media (max-width:860px){
+  .evi{grid-template-columns:minmax(0,1fr);gap:20px}
+  .hero .split,.body,.body.flip{grid-template-columns:minmax(0,1fr)}
+  .hero .l{padding:40px 0 28px}
+  .hero .r{margin-inline:calc(-1 * max(20px,env(safe-area-inset-left,0px)));padding:32px max(20px,env(safe-area-inset-left,0px))}
+  .row{grid-template-columns:1fr;gap:2px}
+  .body.flip .fig{order:0}
+  .top .who{display:none}
+  .top nav{margin-left:0}
+}
+@media (max-width:560px){
+  .branch,.cols,.method{grid-template-columns:1fr}
+  .shift{grid-template-columns:1fr}.shift span{text-align:center;transform:rotate(90deg)}
+  .no{font-size:34px}
+  .stats{grid-template-columns:1fr;gap:12px}
+  section.story,.evidence{padding-block:48px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="who" href="#top" style="text-decoration:none">양지선 · Ph.D.</a>
+    <div class="modes" role="group" aria-label="읽는 시간 선택"><button type="button" data-mode="30" aria-pressed="false">30초</button><button type="button" data-mode="3" aria-pressed="true">3분</button><button type="button" data-mode="10" aria-pressed="false">10분</button></div><nav aria-label="목차">
+      <a href="#top">첫 화면</a><a href="#s1">1 콜로크만</a><a href="#s2">2 LLM 치료 노트</a><a href="#s3">3 글로벌 헬스</a><a href="#s4">4 제약사 B2B 몰</a><a href="#s5">5 XGEO</a><a href="#evidence">함께 보면 좋은 프로젝트</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- Layer 1 -->
+<div class="hero" id="top">
+  <div class="wrap">
+    <div class="split">
+      <div class="l">
+        <p class="eyebrow">AI 에이전트 프로덕트 기획 및 전략</p>
+        <h1>의료진과 함께 문제를 정의하고, <em>AI가 모르는 것은 사람에게 넘기도록</em> 설계합니다.</h1>
+        <p class="sub">숫자를 보여 주는 데서 멈추지 않고, 다음 행동을 안내하는 의료 AI를 만듭니다.</p>
+        <div class="modebar"><div class="modes" role="group" aria-label="읽는 시간 선택"><button type="button" data-mode="30" aria-pressed="false">30초</button><button type="button" data-mode="3" aria-pressed="true">3분</button><button type="button" data-mode="10" aria-pressed="false">10분</button></div><span class="hint" id="modehint" aria-live="polite"></span></div>
+        <div class="rows">
+          <div class="row"><b>문제 정의와 제품 방향</b><div><p>방사선사 관찰로 제품과 UI를 바꾸고, 사용자의 말에서 ‘숫자 말고 다음 행동’을 읽고, 퇴원 후 복약 중단을 핵심 문제로 정의</p><div class="go"><a href="#s1">콜로크만</a><a href="#s3">글로벌 헬스</a><a href="#s4">제약사 B2B 몰</a><a href="#s5">XGEO</a></div></div></div>
+          <div class="row"><b>빠른 실행과 검증</b><div><p>직접 만든 LLM 프로토타입, 쿠팡 광고센터에서 AI로 3일 안에 컨셉 디자인과 프로토타이핑을 하고 반복 사용성 평가를 바로 개발에 반영</p><div class="go"><a href="#s2">LLM 치료 노트</a><a href="#evidence">함께 보면 좋은 프로젝트</a></div></div></div>
+          <div class="row"><b>지표와 AI 품질 관리</b><div><p>의료진이 답을 채우는 검수 루프와 품질 지표 설계안, 쿠팡 UX Scoring, GIV의 VOC 분류 기준 변경으로 작업 시간 20% 단축</p><div class="go"><a href="#s1">콜로크만</a><a href="#s2">LLM 치료 노트</a><a href="#evidence">함께 보면 좋은 프로젝트</a></div></div></div>
+          <div class="row"><b>협업과 리더십</b><div><p>병원·보건소·재활센터 공동 설계, 한국지엠 HMI 표준 문서 합의, 엔지니어 Walkthrough, 영문 UX Spec</p><div class="go"><a href="#s1">콜로크만</a><a href="#evidence">함께 보면 좋은 프로젝트</a></div></div></div>
+        </div>
+        
+      </div>
+      <div class="r">
+        <div class="phone"><img src="img/llm-proto.jpg" alt="결핵 치료 노트 프로토타입 화면: 박사님께 묻기, 복약관리, 건강체크, 진료예약, 병원·시설"></div>
+        <div class="tag"><b>결핵 치료 노트</b> · 직접 만든 LLM 프로토타입(검증 전)<br><a class="cta" href="https://claude.ai/artifact/KqTHZjAMRhhEijrp6F5V9V" target="_blank" rel="noopener">프로토타입 열어 보기 →</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Layer 2 -->
+<section class="story" id="s1">
+  <div class="wrap">
+    <div class="sh"><div class="no">1</div><div class="tag">대표 사례</div><h2>콜로크만: 의료진의 답이 챗봇으로 흐르는 구조를 만들다</h2><p class="proof">임상 현장의 다양한 이해관계자를 만나 문제를 정의하고, 의료진이 답한 내용이 챗봇에 반영되는 서비스를 설계했습니다.</p></div>
+    <div class="body">
+      <div class="slots">
+        <div class="slot" data-t="10"><div class="l">상황과 내 역할 (2019)</div><p>서북병원 인터뷰 후 서비스 방향을 정하고, 기능 설계부터 대화 흐름, 의료진 대시보드, 사용자 평가까지 기획했습니다. <b>프로젝트 리드로서 실무 전반을 이끌었습니다.</b></p></div>
+        <div class="slot" data-t="10"><div class="l">문제 정의</div><p>의사, 간호사를 포함한 의료진, 재활센터 관리자, 병동 환자들의 요구를 모아 필수 기능을 정리했습니다. 환자에게 매번 안내하는 부담과 환자가 질문을 어디에 해야 하는지 모르는 문제를 함께 풀어야 했습니다.</p></div>
+        <div class="slot" data-t="3"><div class="l">핵심 결정</div><p>챗봇을 카카오톡 오픈빌더(Kakao i Open Builder)로 구현하고, <b>의료진이 대시보드에 답한 내용이 챗봇 답변으로 이어지게</b> 했습니다.</p></div>
+        <div class="slot team" data-t="10"><div class="l">함께한 전문가·조직과 합의한 것</div><p>의료진과 병원이 직접 답하는 범위와 챗봇이 안내해도 되는 범위를 나눠 정했습니다. 답할 수 없는 질문은 의료진이 확인하는 흐름으로 넘겼습니다.</p></div>
+        <div class="slot" data-t="10"><div class="l">사용자 평가</div><p>UX writing을 위한 문해력 평가, 2차에 걸린 챗봇 사용성 평가 결과를 제품에 반영하였고, 시범 운영 기간 동안 다이어리 스터디로 사용 맥락을 확인하고 대화 흐름에 반영했습니다.</p></div>
+        <div class="slot" data-t="3"><div class="l">결과</div><p>시범 운영을 통해 이해관계자의 만족도를 이끌어냈고, 챗봇으로 행정안전부 장관 우수상을 수상하였습니다. 연구 결과는 JMIR mHealth and uHealth 논문에 공동 저자로 실렸습니다.</p></div>
+        <div class="slot take" data-t="3"><div class="l">NAVER에 가져갈 것</div><p>“AI가 말할 수 있는 것”과 “의료진이 답해야 할 것”을 나눠 설계한 경험이 의료 LLM의 판단 경계 설계의 시작점이었습니다. 다음 편의 프로토타입이 이 구조를 이어받습니다. 사용자 상황에 따라 도움이 되는 지점이 달라, AI 자체뿐 아니라 사용을 돕는 교육·조직 환경까지 설계해야 한다는 점도 배웠습니다.</p></div>
+        <div>
+          <details data-t="10"><summary>사업 배경</summary><div class="in"><p>행정안전부·한국지능정보사회진흥원이 주관하는 ‘스마트 결핵퇴치’ 사업의 일부였습니다. 연세대 생활디자인학과 연구팀과 서울시립서북병원이 공동으로 진행하였습니다. <br>대상은 재발이 잦은 주거취약계층 결핵 환자이며 서북병원에 입원중인 환자들이었습니다.</p></div></details>
+          <details data-t="10"><summary>연구가 보여 준 것</summary><div class="in"><p>지속적인 사용을 위해서는 사용성도 중요하지만, 사용 의도를 좌우하는 요인이 달랐습니다. 결핵 경험이 있는 주거취약계층은 사용을 도와주는 기술·조직 인프라(촉진 조건)가, 경험이 없는 사람은 챗봇에 대한 태도가 영향을 주었습니다. 그래서 챗봇 뿐 아니라 사용 환경을 함께 디자인해야 한다는 결론이 나왔습니다.</p></div></details>
+        </div>
+      </div>
+      <div class="fig">
+        <figure class="pad" aria-label="의료진의 답이 챗봇 답변으로 이어지는 구조">
+          <div class="flow">
+            <div class="node">환자가 카카오톡으로 질문한다</div>
+            <div class="down">▼</div>
+            <div class="cols">
+              <div class="node hl"><b>챗봇이 안내해도 되는 범위</b><br>정보·복약 알림·예약 안내</div>
+              <div class="node warn"><b>답할 수 없는 질문</b><br>의료진 확인 흐름으로 넘김</div>
+            </div>
+            <div class="down">▼</div>
+            <div class="node">병원 대시보드에서 의료진이 답한다</div>
+            <div class="down">▼</div>
+            <div class="node hl">그 답이 챗봇 답변으로 반영된다</div>
+          </div>
+          <figcaption style="margin:16px -20px -20px">의료진의 답이 챗봇으로 이어지는 구조</figcaption>
+        </figure>
+        <figure data-t="10"><img src="img/tb-dashboard.jpg" alt="결핵 박사 콜로크만 병원 환자 관리 화면: 복약 응답 현황과 산소포화도 추이" loading="lazy"><figcaption>병원의 환자 관리 화면. 복약 응답과 부작용 신호를 한눈에 봅니다.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="s2">
+  <div class="wrap">
+    <div class="sh"><div class="no">2</div><div class="tag">대표 사례 · 직접 만든 프로토타입</div><h2>LLM 결핵 치료 노트: 답하지 않는 기준을 먼저 정하다 <span class="chip">검증 전</span></h2><p class="proof">지식베이스 안에서만 답하고 출처를 표시하며, 근거가 없으면 답을 보류하고 질문을 의료진에게 넘기는 환자용 LLM 프로토타입을 설계했습니다.</p></div>
+    <div class="body flip">
+      <div class="slots">
+        <div class="slot" data-t="10"><div class="l">상황과 내 역할 (개인 프로젝트)</div><p>챗봇 기반 콜록크만을 구현해보았습니다. 기술적, 리소스 이슈로 기존 버전에서 제공되지 않았던 기능을 추가하였고, LLM 버전으로 환자가 무엇을 묻고, 어느 선까지 안내해도 되는지를 정해 프로토타입을 만들었습니다.</p></div>
+        <div class="slot" data-t="3"><div class="l">핵심 결정 1</div><p><b>지식베이스 문서 안에서만 답하고 출처를 표시합니다.</b></p></div>
+        <div class="slot" data-t="3"><div class="l">핵심 결정 2</div><p><b>근거가 없으면 답을 보류하고,</b> 질문을 의료진이 확인하는 목록에 쌓아 전달합니다. <br>이 질문은 이후 지식베이스를 보완하는 자료가 됩니다.</p></div>
+        <div class="slot team" data-t="10"><div class="l">설계의 근거가 된 현장 합의</div><p>콜로크만에서 의료진과 정한 답변 경계(챗봇이 안내해도 되는 범위와 의료진이 답해야 하는 범위)를 근거로, LLM이 지켜야 할 안전 장치와 의료진 검수 루프를 설계했습니다. 이 프로토타입 자체는 아직 의료진 검증을 거치지 않았습니다.</p></div>
+        <div class="slot" data-t="3"><div class="l">결과</div><p>작동하는 프로토타입과 품질 지표 설계안이 있습니다.</p></div>
+        <div class="slot take" data-t="3"><div class="l">NAVER에 가져갈 것</div><p>의료 LLM의 품질은 “얼마나 잘 답하나”만큼 “언제 답하지 않나”로 정해집니다. 보류 기준, 의료진 전달 경로, 지표를 출시 전에 먼저 정하는 방식을 가져갑니다.</p></div>
+        <details data-t="10"><summary>품질 지표 설계안 <span class="chip">검증 전</span></summary><div class="in"><p>아래는 측정 계획이며 실측 값이 아닙니다.</p><div class="metrics" style="margin-top:10px">
+          <div><span><b>출처 일치율:</b> 답변이 인용한 문서에 실제로 근거가 있는 비율</span></div>
+          <div><span><b>보류 적정률:</b> 근거가 없는데 보류한 비율, 근거가 있는데 보류한 비율</span></div>
+          <div><span><b>의료진 확인 목록:</b> 처리 시간과 지식베이스 반영 비율</span></div>
+          <div><span><b>위험 신호 질문:</b> 의료진 전달 누락 0건 목표</span></div></div></div></details>
+      </div>
+      <div class="fig">
+        <figure><img src="img/llm-proto.jpg" alt="결핵 치료 노트 프로토타입 화면: 박사님께 묻기, 복약관리, 건강체크, 진료예약, 병원·시설" loading="lazy"><figcaption>결핵 치료 노트 프로토타입(환자 앱). 위의 버튼으로 직접 열어 볼 수 있습니다.</figcaption></figure>
+        <a class="cta" style="margin-top:0;justify-content:center;background:var(--accent);color:#fff" href="https://claude.ai/artifact/KqTHZjAMRhhEijrp6F5V9V" target="_blank" rel="noopener">프로토타입 열기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="s3">
+  <div class="wrap">
+    <div class="sh"><div class="no">3</div><div class="tag">대표 사례</div><h2>글로벌 헬스 리서치: 숫자를 보여 주는 앱에서, 다음 행동을 알려 주는 코치로</h2><p class="proof">여러 나라 사용자의 말을 같은 기준으로 모아, 제품이 줘야 할 것은 수치가 아니라 다음 행동이라는 결론을 냈습니다.</p></div>
+    <div class="body">
+      <div class="slots">
+        <div class="slot" data-t="10"><div class="l">상황과 내 역할</div><p>웨어러블 헬스 제품의 글로벌 사용자 리서치에 참여했습니다. <b>미국 현지 조사(실사)의 책임자</b>로, 홈비짓, FGI 가이드를 작성하였고 실사와 리서치 결과를 직접 정리했습니다. 그 외에 홈비짓과 FGI의 참여자 리쿠르팅 및 FGI 모더레이터, FGI 장소 섭외를 위해 미국·영국 에이전시를 직접 컨택하여 일정과 조건을 조율하였습니다.</p></div>
+        <div class="slot" data-t="3"><div class="l">핵심 발견</div><p>미국 수면 그룹의 불면증 환자 인터뷰에서 “수치를 아는 것은 중요하지 않다. 그래서 내가 어떻게 해야 하는지 알고 싶다”는 취지의 이야기가 나왔고, 수면 그룹 전체에서 비슷한 이야기가 반복됐습니다.</p></div>
+        <div class="slot" data-t="3"><div class="l">핵심 결정</div><p>이 발견을 “측정 값 제공”에서 “다음 행동을 제안하는 코치”로 제품 방향을 옮기자는 근거로 정리했습니다. 정확한 측정 값은 기본 조건이지만 사용자가 감탄하는 지점은 아니었습니다. 측정에서 멈추면 계속 쓸 이유가 없다는 것이 인터뷰에서 반복된 반응이었습니다. 그래서 <b>수치를 해석하고 다음 행동까지 이어 주는 것</b>을 사용자가 체감하는 가치로 제안했습니다.</p></div>
+        <div class="slot team" data-t="10"><div class="l">함께한 전문가·조직과 합의한 것</div><p>FGI 모더레이터와 가이드로 미팅해 진행 방식을 맞췄습니다. 데이터와 결과 양식은 우리 팀이 직접 정리해, 제품 팀에는 같은 양식의 결과를 공유했습니다.</p></div>
+        <div class="slot" data-t="3"><div class="l">결과</div><p>제안된 여러가지 기능 중 수면 코치 기능의 헬스 제품이 출시됐습니다.</p></div>
+        <div class="slot take" data-t="3"><div class="l">NAVER에 가져갈 것</div><p>의료 AI도 환자와 의료진은 “답”보다 “다음에 무엇을 할지”를 원합니다. 나라마다 사용자 말을 같은 기준으로 비교해 기능 범위를 정하는 방법을 가져갑니다.</p></div>
+      </div>
+      <div class="fig">
+        <figure class="pad" aria-label="제품 방향의 이동">
+          <div class="shift"><div class="from">측정값 제공</div><span>→</span><div class="to">다음 행동을 제안하는 코치</div></div>
+          <figcaption style="margin:16px -20px -20px">인터뷰에서 반복된 반응이 가리킨 방향</figcaption>
+        </figure>
+        <figure data-t="10" class="pad" aria-label="나라 간 결과를 비교할 수 있게 한 방법">
+          <div class="method">
+            <div><b>리서치 방식 </b><br>3개국 동일한 질문지와 가이드</div>
+            <div><b>같은 모집 기준</b><br>수면,식이, 운동 그룹 참가자 선정</div>
+            <div><b>모더레이터 미팅</b><br>FGI 가이드로 진행 사전 조율</div>
+            <div><b>같은 결과 양식</b><br>3개국 동일한 결과 양식</div>
+          </div>
+          <figcaption style="margin:16px -20px -20px">나라 간 결과를 비교할 수 있게 한 네 가지</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="s4">
+  <div class="wrap">
+    <div class="sh"><div class="no">4</div><div class="tag">대표 사례</div><h2>제약사 B2B 몰: 3주 스프린트로 약사의 구매 방식을 기능 로드맵으로</h2><p class="proof">약사 9명을 인터뷰해 영업사원의 역할이 여전히 필요하다는 것을 확인하고, 온라인 몰과 영업사원을 함께 쓰는 ‘온-오프라인 통합 전략’을 제안했습니다.</p></div>
+    <div class="body flip">
+      <div class="slots">
+        <div class="slot" data-t="10"><div class="l">상황과 내 역할 · Ipsos, 2024.08</div><p>제약사 B2B 이커머스 플랫폼의 시장점유율이 12%에서 8%로 급감한 상황이었습니다. kick-off부터 조사 완료까지 3주 안에 실행할 수 있는 UX 전략과, 이커머스를 확장하면서 기존 영업사원을 어떻게 활용할지 제안해야 했습니다. 클라이언트 이해관계자 인터뷰로 비즈니스 문제를 정의하고, 경쟁사 분석과 타깃 약사 선정 기준을 세워 조사를 이끌었습니다.</p></div>
+        <div class="slot" data-t="3"><div class="l">핵심 결정</div><p>현직 약사 9명을 대면·화상으로 심층 인터뷰했습니다. 클로바노트와 자사 AI 분석 툴로 디브리핑을 빠르게 하고, 정량·정성 데이터를 교차 검증해 신뢰도 높은 페인포인트를 맵핑했습니다. 이를 바탕으로 16개 기능을 비교해 우선순위를 정하고 로드맵을 만들었습니다.</p></div>
+        <div class="slot team" data-t="10"><div class="l">함께한 전문가·조직과 합의한 것</div><p>약사의 온라인 몰 주문을 포함한 약국 운영 전체의 고객 여정 지도를 만들고, 이를 바탕으로 화면·기능 범위와 영업사원 활용 전략을 정했습니다.</p></div>
+        <div class="slot" data-t="3"><div class="l">결과</div><p>9명 중 9명이 영업 담당자는 여전히 필요하다고 답했습니다. 그래서 디지털 시대에도 영업사원(MR)의 역할을 다시 세우는 것이 플랫폼 성공의 핵심이라는 ‘온-오프라인 통합 전략’을 제시했고, 온라인에서도 담당자와의 연결이 사라지지 않게 설계하는 근거가 됐습니다.</p></div>
+        <div class="slot take" data-t="3"><div class="l">NAVER에 가져갈 것</div><p>모호한 정성 피드백을 구조화해 기능 우선순위와 로드맵으로 바꾸고, 온라인으로 옮겨도 사람(영업사원)의 역할을 지우지 않는 방식입니다.</p></div>
+        <details data-t="10"><summary>조사 설계와 실행 로드맵</summary><div class="in"><div class="kv">
+          <div><b>조사 설계:</b> 1:1 심층 인터뷰 30분. 직접 약국을 운영하고 최근 3개월 안에 제약 B2B 몰 구매 경험이 있는 약사 9명.</div>
+          <div><b>즉시:</b> 약국 규모별 가격 전략 파일럿</div>
+          <div><b>1개월:</b> 약국 유형·연령별 커뮤니케이션 가이드와 영업사원 교육</div>
+          <div><b>2개월:</b> 반품 절차 간소화와 영업사원 연동</div>
+          <div><b>다음 검증:</b> 정성 결과를 규모로 확인하는 정량 조사 설계(플랫폼 인지·사용 현황, 서비스와 영업사원 역할 평가, 리뉴얼 컨셉 평가)</div></div></div></details>
+      </div>
+      <div class="fig">
+        <figure class="pad" aria-label="약사 9명 중 9명이 영업 담당자를 필요로 함">
+          <div class="big">9<small> / 9명</small></div>
+          <div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p style="color:var(--ink-2);font-size:15px">영업 담당자를 여전히 필요로 한다고 답한 약사</p>
+          <figcaption style="margin:16px -20px -20px">인터뷰 대상 약사 9명 기준. 정성 조사 결과입니다.</figcaption>
+        </figure>
+        <figure class="pad jm" aria-label="약국 운영 고객 여정 지도: 구매·반품 과정에 불편이 모임">
+          <div class="jm-t">약국 운영 고객 여정 지도</div>
+          <div class="jm-g">
+            <div class="jm-p ph0"><div class="jm-n">주문 전</div><div class="jm-d"><i class="z"></i><i class="z"></i></div></div>
+            <div class="jm-p ph1"><div class="jm-n">이커머스 구매 과정</div><div class="jm-d"><i class="z"></i><i class="n"></i><i class="p"></i><i class="n"></i><i class="n"></i><i class="z"></i><i class="z"></i></div></div>
+            <div class="jm-p ph2"><div class="jm-n">반품 과정</div><div class="jm-d"><i class="p"></i><i class="n"></i><i class="p"></i><i class="n"></i></div></div>
+            <div class="jm-p ph0"><div class="jm-n">이후</div><div class="jm-d"><i class="z"></i></div></div>
+          </div>
+          <div class="jm-k"><span><i class="n"></i>불편</span><span><i class="p"></i>긍정</span><span><i class="z"></i>중립</span></div>
+          <p style="font-size:14.5px;color:var(--ink-2);margin-top:12px">현재 주요 페인포인트는 ‘구매 및 반품 과정’에 모였고, 전반적인 편의성 개선과 단계 간소화에 대한 니즈가 높았습니다.</p>
+          <figcaption style="margin:16px -20px -20px">인터뷰를 바탕으로 다시 그린 고객 여정 지도(감정 흐름만 표시)</figcaption>
+        </figure>
+        <style>
+.jm .jm-t{font-weight:800;font-size:15px;margin-bottom:12px}
+.jm-g{display:flex;gap:6px;align-items:stretch}
+.jm-p{display:flex;flex-direction:column;gap:8px;min-width:0}
+.jm-p.ph0{flex:0 0 auto}
+.jm-p.ph1{flex:7 1 0}.jm-p.ph2{flex:4 1 0}
+.jm-n{font-size:12px;font-weight:800;text-align:center;padding:6px 4px;border-radius:8px;background:var(--surface-2);color:var(--ink-3);line-height:1.3}
+.ph1 .jm-n,.ph2 .jm-n{background:var(--blue);color:#fff}
+.jm-d{display:flex;justify-content:space-around;align-items:center;gap:4px;padding:10px 2px;border-radius:8px;background:var(--surface-2);flex:1}
+.jm-d i,.jm-k i{display:inline-block;width:18px;height:18px;border-radius:50%;flex:none}
+.jm i.n{background:#D13B3B}.jm i.p{background:#2B7BC4}.jm i.z{background:#9AA7B5}
+.jm-k{display:flex;gap:14px;margin-top:12px;font-size:12.5px;color:var(--ink-2)}
+.jm-k span{display:inline-flex;align-items:center;gap:6px}.jm-k i{width:12px;height:12px}
+</style>
+        <figure data-t="10" class="pad" aria-label="기능 16개에서 우선순위, 로드맵까지">
+          <div class="steps"><span>이해관계자 인터뷰</span><i>→</i><span>약사 9명 심층 인터뷰</span><i>→</i><span>페인포인트 맵핑</span><i>→</i><span>고객 여정 지도</span><i>→</i><span>통합 전략</span></div>
+          <figcaption style="margin:16px -20px -20px">3주 스프린트의 흐름</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="s5">
+  <div class="wrap">
+    <div class="sh"><div class="no">5</div><div class="tag">대표 사례</div><h2>XGEO: 방사선사의 일을 보고 제품을 바꾸다</h2><p class="proof">의료 현장의 업무 순서를 관찰해, 제품과 촬영 콘솔 UI에 반영했습니다.</p></div>
+    <div class="body">
+      <div class="slots">
+        <div class="slot" data-t="10"><div class="l">상황과 내 역할 (2010)</div><p>삼성전자가 처음 출시한 디지털 X-ray(XGEO) 프로젝트의 UX 기획을 맡아 현장 조사와 FGI, 사용 시나리오, 화면 설계를 했습니다.</p></div>
+        <div class="slot" data-t="3"><div class="l">핵심 결정</div><p>촬영실에서 방사선사의 업무를 관찰하고 인터뷰해, <b>불편하고 중복된 단계를 걷어내</b> 사용 시나리오를 짧게 만들었습니다. 화면은 네 단계로 정리했습니다.</p><div class="steps" style="margin-top:10px"><span>Patient List</span><i>→</i><span>Patient Positioning</span><i>→</i><span>Acquisition</span><i>→</i><span>Review</span></div></div>
+        <div class="slot team" data-t="10"><div class="l">함께 합의한 것</div><p>방사선사 관찰·인터뷰 결과를 X-ray 제품의 디자인과 기능, 촬영 콘솔 소프트웨어와 PACS UI에 반영했습니다.</p></div>
+        <div class="slot" data-t="10"><div class="l">임상 안전을 화면 규칙으로</div><div class="rules"><div><b>·</b><span>권장 범위를 벗어나면 경고 아이콘을 보여 줍니다.</span></div><div><b>·</b><span>영상 삭제 전에는 확인 팝업을 거칩니다.</span></div><div><b>·</b><span>촬영 직후 Confirm과 Reject로 재촬영 여부를 정하게 했습니다.</span></div></div></div>
+        <div class="slot" data-t="3"><div class="l">결과</div><p>XGEO는 IDEA 2012(미국산업디자이너협회 IDSA 주최) 금상 수상 제품입니다. 수상은 제품 단위이며, 해당 프로젝트의 UX를 맡았습니다.</p></div>
+        <div class="slot take" data-t="3"><div class="l">NAVER 의료 AI에 가져갈 것</div><p>의료진의 실제 업무 순서를 제품 구조로 옮기고, 실수를 막는 규칙을 명세로 남긴 경험이 AI의 예외 처리와 출시 기준을 정하는 바탕이 됩니다.</p></div>
+      </div>
+      <div class="fig">
+        <figure><img src="img/xgeo-console.jpg" alt="XGEO 촬영 콘솔 소프트웨어가 표시된 디지털 X-ray 제품" loading="lazy"><figcaption>XGEO 제품과 촬영 콘솔 소프트웨어</figcaption></figure>
+        <figure data-t="10"><img src="img/xgeo-acquisition.jpg" alt="XGEO 촬영 화면(Acquisition) 설계안과 기능 명세" loading="lazy"><figcaption>촬영(Acquisition) 화면 설계안과 기능 명세</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Layer 3 -->
+<section class="evidence" id="evidence">
+  <div class="wrap">
+    <h2>함께 보면 좋은 프로젝트</h2>
+    <p class="lead">대표 5편 밖의 경험입니다. 협업·지표·AI 활용을 뒷받침하는 순서로 놓았습니다.</p>
+    <div class="sumwrap"><table class="mini sum"><thead><tr><th>프로젝트</th><th>역할</th><th>한 일</th><th>근거</th></tr></thead><tbody>
+      <tr><td>Momenti GIV Studio</td><td>Lead UX 리서처</td><td>VOC를 비즈니스 임팩트 기준으로 재분류</td><td>작업 시간 20% 단축</td></tr>
+      <tr><td>쿠팡 광고센터</td><td>UX 리서치 설계·분석</td><td>개편 기준선과 KPI 2축 설계, AI로 개선 주기 단축</td><td>UT N=35 · 설문 N=196</td></tr>
+      <tr><td>한국지엠</td><td>HMI 파트 리드</td><td>HMI 표준 문서(GIS-426)와 합의 프로세스</td><td>SUS 89</td></tr>
+      <tr><td>HARU</td><td>앱 UX 기획·사용성 평가</td><td>암 환자 심리치료 앱 설계와 평가</td><td>암 환자 5명 평가</td></tr>
+      <tr><td>Samsung Account</td><td>UX 기획</td><td>요구사항, 예외 처리, 영문 UI 가이드</td><td>누적 12억 계정</td></tr>
+    </tbody></table></div>
+
+    <article class="evi">
+      <div>
+        <p class="kick">Momenti GIV Studio, 2023 · Lead UX 리서처</p>
+        <h3>VOC를 개발 우선순위로 바꾸다</h3>
+        <p class="t" data-t="10">높은 우선순위의 VOC가 짧은 기간에 쏟아졌지만, 요약된 VOC만으로는 크리에이터의 실제 작업 맥락을 알 수 없었습니다. 크리에이터 스튜디오를 직접 찾아 작업을 관찰한 결과, 문제는 모바일과 PC를 오가며 끊기는 워크플로우와 비즈니스 기준이 없는 VOC 관리였습니다. 개발자와 클라이언트 사이를 조율해 VOC 규칙을 바꿨습니다.</p>
+        <div class="stats">
+          <div class="stat"><b>20% 단축</b><span>크리에이터 작업 시간</span></div>
+          <div class="stat"><b>1주</b><span>현장 관찰 3일, 분석·설계 2일, 공유 1일</span></div>
+          <div class="stat"><b>만족도 상승</b><span>클라이언트</span></div>
+        </div>
+        <details data-t="10"><summary>바꾼 것</summary><div class="in"><div class="kv">
+          <div><b>우선순위 기준:</b> 기능별 분류에서 비즈니스 임팩트 기준으로 바꾸고, Jira 주간 VOC 리뷰를 운영했습니다.</div>
+          <div><b>개발 조직 합의:</b> 리드 엔지니어가 크리에이터 작업을 직접 따라 해 보는 Walkthrough를 열었습니다.</div>
+          <div><b>신규 사용자 안내:</b> 새 사용자를 위한 매뉴얼을 Confluence 기반으로 만들었습니다.</div></div></div></details>
+        <details data-t="10"><summary>현장 관찰에서 찾은 것</summary><div class="in"><p>인터뷰로는 보이지 않는 우회 방법을 찾기 위해, 숙련 크리에이터의 수정 작업을 파일 다운로드부터 Export까지 따라가며 관찰했습니다(Contextual Inquiry).</p><div class="kv" style="margin-top:8px">
+          <div><b>워크플로우 단절:</b> PC 앱의 사용성보다, 작업이 모바일과 PC로 갈라지며 생긴 전환 비용이 핵심이었습니다.</div>
+          <div><b>VOC에 비즈니스 기준이 없음:</b> 로딩 시간, 작업 시간처럼 매출에 직결되는 이슈가 기능 분류 속에 묻혀 있었습니다.</div>
+          <div><b>NAVER에 가져갈 것:</b> 의료진 피드백과 AI 응답 품질 이슈를 임상 영향과 사용 빈도 기준으로 정렬해 개선 순서를 정합니다.</div></div>
+          <figure class="infig"><img src="img/giv-journey.jpg" alt="GIV 크리에이터 고객 여정 지도" loading="lazy"><figcaption><b>고객 여정 지도.</b> 단계마다 행동, 접점, 감정, 페인 포인트, 기회를 매핑했습니다.</figcaption></figure></div></details>
+      </div>
+      <figure data-t="10"><img src="img/giv-voc.jpg" alt="VOC 분류 체계 개편" loading="lazy"><figcaption><b>VOC 분류 체계 개편.</b> 기능 로드맵과 기술 난이도 기준이던 분류에 파트너사의 운영 요구사항을 더해, 비즈니스 임팩트로 우선순위를 정하게 했습니다.</figcaption></figure>
+    </article>
+
+    <article class="evi">
+      <div>
+        <p class="kick">쿠팡 광고센터 UX 스코어링</p>
+        <h3>개편의 기준선과 KPI를 설계하고, AI로 개선 주기를 줄이다</h3>
+        <p class="t" data-t="10">개편 효과를 증명할 기준선과 먼저 해결할 과제가 필요했습니다. Moderated UT(N=35, 8개 과업)와 설문(N=196, 12문항)을 묶어 기준선을 만들고, 회귀분석으로 만족과 성과를 움직이는 요인을 나눴습니다. 또 AI로 프로토타입을 만들고 결과를 분석해 반영하는 짧은 사이클로, 3일 안에 컨셉을 디자인하고 반복 사용성 평가를 바로 개발에 반영했습니다.</p>
+        <div class="stats">
+          <div class="stat"><b>37.1%</b><span>추천 확인 과업 성공률, 통합 추천 패널의 근거</span></div>
+          <div class="stat"><b>N=35 · N=196</b><span>Moderated UT와 설문</span></div>
+          <div class="stat"><b>KPI 2축</b><span>만족도와 목표 달성도로 이원화</span></div>
+        </div>
+        <details data-t="10"><summary>결정한 것과 캠페인 규모별 병목</summary><div class="in"><div class="kv">
+          <div><b>제품 방향:</b> 추천 확인 과업 성공률 37.1%를 근거로 예산·ROAS·상품 추천을 모은 통합 추천 Side Panel을 제안했습니다.</div>
+          <div><b>투자 우선순위:</b> IPA 결과로 데이터 시각화보다 추천 유용성에 리소스를 재배치했습니다. 지속 유지는 데이터 신뢰성과 레이아웃, 집중 개선은 추천과 매력도, 과잉 노력 지양은 데이터 시각화로 나눴습니다.</div>
+          <div><b>추천 정보 파편화:</b> 항목별 추천 확인 성공률은 예산 65.7%, 광고 수익률 57.1%, 상품 추천 62.9%였지만, 추천 확인 과업 전체의 성공률은 37.1%로 8개 과업 중 가장 낮았습니다. 개별 정보보다 추천 전체를 한 번에 파악하는 과정이 병목이었습니다.</div>
+          <div><b>설문 기준선(Top2Box):</b> UX 만족도 46.4%, 목표 달성도 37.2%. 추천(33.3%)과 추천 신뢰성(35.1%)이 가장 낮았습니다.</div></div>
+          <table class="mini"><thead><tr><th>관리 캠페인 수</th><th>성과 비교 성공률</th></tr></thead><tbody><tr><td>1개</td><td>83.3%</td></tr><tr><td>2–5개</td><td>64.7%</td></tr><tr><td>6개 이상</td><td>16.7%</td></tr></tbody></table>
+          <p style="margin-top:8px">캠페인이 6개를 넘으면 수동 비교가 무너집니다. 참가자들은 암산과 스마트폰 계산기를 쓰다가 과업을 포기했습니다. 자동 기간 비교와 정렬 기능을 요구사항으로 넘겼습니다.</p></div></details>
+      </div>
+      <div class="figcol" data-t="10">
+      <figure class="pad" aria-label="과업별 성공률: 평균 73.9%, 추천 내용 확인 37.1%로 최하위">
+        <div class="big">73.9<small>% 평균 과업 성공률</small></div>
+        <div class="tbs"><div class="tb g"><span class="tn">T1 전체 매출 확인</span><span class="tr"><i style="width:94.3%"></i></span><span class="tv">94.3%</span></div><div class="tb b"><span class="tn">T2 추천 내용 확인</span><span class="tr"><i style="width:37.1%"></i></span><span class="tv">37.1%</span></div><div class="tb "><span class="tn">T3 소진 광고비 확인</span><span class="tr"><i style="width:82.9%"></i></span><span class="tv">82.9%</span></div><div class="tb "><span class="tn">T4 최저 노출 키워드</span><span class="tr"><i style="width:65.7%"></i></span><span class="tv">65.7%</span></div><div class="tb "><span class="tn">T5 상품 추가/제외</span><span class="tr"><i style="width:80.0%"></i></span><span class="tv">80.0%</span></div><div class="tb g"><span class="tn">T6 7일 vs 이전 7일 광고수익률 비교</span><span class="tr"><i style="width:97.1%"></i></span><span class="tv">97.1%</span></div><div class="tb "><span class="tn">T7 정책 위반 상품 확인</span><span class="tr"><i style="width:71.4%"></i></span><span class="tv">71.4%</span></div><div class="tb w"><span class="tn">T8 전주 대비 캠페인별 매출 변동 비교</span><span class="tr"><i style="width:62.9%"></i></span><span class="tv">62.9%</span></div></div>
+        <figcaption style="margin:16px -20px -20px"><b>과업별 성공률(Moderated UT, N=35).</b> 성과 확인(T1, T6)은 직관적이지만, 추천 확인(T2)과 캠페인 비교(T8)에서 파편화된 정보와 수동 계산이 탐색을 막았습니다.</figcaption>
+      </figure>
+      <figure class="pad" aria-label="IPA 분석: 추천과 매력도는 중요도가 높고 만족도가 낮아 집중 개선 대상">
+        <div class="jm-t" style="font-weight:800;font-size:15px;margin-bottom:12px">IPA(중요도·만족도) 분석</div>
+        <div class="ipw"><span class="ipy">↑ 중요도</span><div class="ipa"><i></i><i></i><i></i><i></i><span class="ipd n r" style="left:13.4%;top:30.5%"><b>Recommendation</b></span><span class="ipd n r" style="left:20.9%;top:42.4%"><b>Attractiveness</b></span><span class="ipd k l" style="left:71.5%;top:24.7%"><b>Layout</b></span><span class="ipd k l" style="left:79.5%;top:13.4%"><b>Data credibility</b></span><span class="ipd o l" style="left:92.3%;top:72.1%"><b>Data visualization</b></span></div><span class="ipx">만족도 →</span></div>
+        <div class="ipz"><div class="n"><b>집중 개선</b>Recommendation, Attractiveness</div><div class="k"><b>지속 유지</b>Data credibility, Layout</div><div class="o"><b>과잉 노력 지양</b>Data visualization</div></div>
+        <figcaption style="margin:16px -20px -20px"><b>개발 우선순위의 근거.</b> 데이터 시각화보다 추천 기능의 유용성과 시각적 매력에 집중해야 한다는 결론을 냈습니다.</figcaption>
+      </figure>
+      </div>
+    </article>
+
+    <article class="evi">
+      <div>
+        <p class="kick">한국지엠, 2011–2014 · HMI 파트 리드</p>
+        <h3>HMI 표준을 만들고 합의를 이끌다</h3>
+        <p class="t" data-t="10">운전 중 안전, 글로벌 표준, 하드웨어 제약을 함께 지켜야 했습니다. HMI Specification 표준 문서(GIS-426)를 만들고 HW/SW 조직과 요구사항을 합의하는 프로세스를 세웠습니다. 미국 본사와 협업해 글로벌 UI 개발 스펙을 영문으로 작성하고, 한국과 미국의 사용성 평가를 통계로 분석해 이슈 우선순위를 정하고 Spec에 반영했습니다.</p>
+        <div class="stats">
+          <div class="stat"><b>SUS 89</b><span>시스템 사용성 점수</span></div>
+          <div class="stat"><b>1.15회</b><span>과업당 평균 오류</span></div>
+          <div class="stat"><b>50% 향상</b><span>캐딜락 내비게이션·음성인식 출시 후 만족도</span></div>
+        </div>
+      </div>
+      <figure data-t="10"><img src="img/gm-results.jpg" alt="한국·미국 사용성 평가 결과 화면" loading="lazy"><figcaption><b>사용성 평가 결과.</b> Spec 개정의 근거가 된 지표입니다.</figcaption></figure>
+    </article>
+
+    <article class="evi">
+      <div>
+        <p class="kick">연세대학교 인지공학 연구실, 2016–2017 · 앱 UX 기획과 사용성 평가</p>
+        <h3>HARU: 암 환자의 심리적 안정을 위한 앱을 설계하다</h3>
+        <p class="t" data-t="10">암 투병 중 불안과 우울, 통증, 수면 문제는 흔하지만, 오프라인 심리치료는 시간과 거리 때문에 이어 가기 어렵습니다. 그래서 하루에 한 번 심리치료 기법을 따라 하고, 힘이 되는 문구가 담긴 카드를 받는 자기주도형 앱을 기획했습니다. 암 환자 5명을 대상으로 사용성을 평가해 개선했습니다.</p>
+        <p class="t pull" data-t="10">디지털 도구는 사람을 대신하는 것이 아니라, 사람에게 닿기 어려운 순간을 메워야 한다. 평가가 가장 낮았던 참가자는 앱보다 주변 사람에게서 도움을 받는다고 했습니다. 이 원칙은 결핵 치료 노트 프로토타입의 ‘마음 안부’로 이어졌습니다.</p>
+        <div class="stats">
+          <div class="stat"><b>5명</b><span>암 환자 사용성 평가</span></div>
+          <div class="stat"><b>5 / 5</b><span>하루카드 저장 과업 성공</span></div>
+          <div class="stat"><b>2 / 5</b><span>그동안의 진도 파악 성공, 첫 개선 과제로</span></div>
+        </div>
+        <details data-t="10"><summary>앱 구조와 동기 설계, 평가 방법</summary><div class="in"><div class="kv">
+          <div><b>구조:</b> 불안·우울, 통증, 수면장애 세 모듈. 오늘하루(그날의 심리치료 실천), 하루카드(지지 문구 카드), 검사(정서 평정), 내 정보(진행률과 검사 결과).</div>
+          <div><b>동기 설계:</b> 매일 기분 평정과 세션별 기분 추이 그래프, 출석 점수와 알림, 카드 저장. 콘텐츠·기록·진행 상황의 내재적 동기와 사회적 상호작용의 외재적 동기를 함께 설계했습니다.</div>
+          <div><b>접근성:</b> 50대 이상도 쉽게 쓰도록 디지털 리터러시를 고려해 화면을 구성했습니다.</div>
+          <div><b>사용성 평가(2017.03):</b> 암 환자 5명, 페이퍼 프로토타입. 모듈별 색상 카드 매칭, 메뉴 명칭 카드 소팅, 과업 수행과 Think-aloud.</div>
+          <div><b>결과 발표:</b> 2018 한국디자인학회 봄 학술대회.</div></div></div></details>
+        <details data-t="10"><summary>평가 후 바꾼 것</summary><div class="in"><div class="kv">
+          <div><b>오늘 할 치료를 가장 먼저:</b> ‘이미 한 교육’과 ‘오늘 할 교육’을 구분하지 못해, 오늘의 시작 버튼을 가장 눈에 띄게 했습니다.</div>
+          <div><b>설정 아이콘 교체:</b> 참가자들이 ‘내 기록 보기’로 오인했습니다.</div>
+          <div><b>정서 평정 입력 다양화:</b> 버튼, 하단 바 터치, 드래그를 모두 지원했습니다.</div>
+          <div><b>모듈 색상 확정:</b> 우울·불안은 녹색, 수면은 한색, 통증은 난색 계열로 정했습니다.</div></div></div></details>
+      </div>
+      <figure data-t="10"><img src="img/haru-screens.jpg" alt="HARU 앱 화면" loading="lazy"><figcaption><b>HARU 화면.</b> 홈의 출석 점수와 알림, 세션별 기분 추이 그래프, 오늘의 기분 평정, 하루카드.</figcaption></figure>
+    </article>
+
+    <article class="evi">
+      <div>
+        <p class="kick">Samsung Account, 2021–2022 · UX 기획</p>
+        <h3>글로벌 인증 플랫폼의 요구사항과 예외 처리를 설계하다</h3>
+        <p class="t" data-t="3">누적 12억 계정을 통합 인증하는 플랫폼의 요구사항을 도출하고, 보안 대시보드와 예외 처리 화면, 영문 UI 가이드를 만들었습니다. IA, User Flow, UX Spec 문서를 작성했습니다.</p>
+      </div>
+      <figure data-t="10"><img src="img/sa-screens.jpg" alt="Samsung Account 화면" loading="lazy"><figcaption><b>Samsung Account 화면.</b> 보안 대시보드와 예외 처리 화면.</figcaption></figure>
+    </article>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">양지선 · 인지공학심리학 박사 · UX 리서치·기획. </div></footer>
+
+<script>
+(function(){
+  var hints={"30":"첫 화면만 봅니다. 대표 사례는 3분에서 펼쳐집니다.","3":"대표 5편의 핵심 결정과 결과만 봅니다.","10":"역할, 과정, 근거 자료까지 모두 펼쳐서 봅니다."};
+  var root=document.documentElement;
+  function set(m){
+    root.setAttribute("data-mode",m);
+    var bs=document.querySelectorAll(".modes button");
+    for(var i=0;i<bs.length;i++){bs[i].setAttribute("aria-pressed",bs[i].getAttribute("data-mode")===m?"true":"false");}
+    var h=document.getElementById("modehint"); if(h) h.textContent=hints[m];
+    var ds=document.querySelectorAll("details");
+    for(var j=0;j<ds.length;j++){ if(m==="10") ds[j].setAttribute("open",""); else ds[j].removeAttribute("open"); }
+  }
+  document.addEventListener("click",function(e){
+    var b=e.target.closest&&e.target.closest(".modes button"); if(b){ var mm=b.getAttribute("data-mode"); set(mm); if(mm==="30") window.scrollTo(0,0); return; }
+    var a=e.target.closest&&e.target.closest("a[href^='#s'],a[href='#evidence']");
+    if(a && root.getAttribute("data-mode")==="30") set("3");
+  });
+  set("3");
+})();
+</script>
+</body>
+</html>
